@@ -61,5 +61,5 @@ st.sidebar.write("Developed by:")
 st.sidebar.write("[Charles Sewe](https://www.linkedin.com/in/charles-sewe)")
 
 st.sidebar.write("[Project Blog Article](https://docs.google.com/document/d/1F1L9EltYW28vnnULs5z-plJ_VAuMDzupGw3w8vheQEM/edit?usp=sharing)")
-st.sidebar.write("[Deployed Site]()")
+st.sidebar.write("[Deployed Site](https://csewe56-qnvf2ccw3bdesyqxhnfuqd.streamlit.app/)")
 
