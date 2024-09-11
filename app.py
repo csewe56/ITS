@@ -11,7 +11,8 @@ st.title("Integrity Track System")
 
 # Sidebar for navigation
 st.sidebar.title("Navigation")
-options = ["Home", "Report Incident", "Case Management", "Financial Tracking", "Audit Visualization", "Data Analysis"]
+options = ["Home", "Report Incident", "Case Management", "Financial Tracking", "Audit Visualization", 
+           "Data Analysis", "Quiz Application", "Portfolio Project Idea Bank"]
 choice = st.sidebar.selectbox("Go to", options)
 
 # Sample data
@@ -31,17 +32,16 @@ df = pd.DataFrame(data)
 # Home Page
 if choice == "Home":
     st.header("Welcome to the Integrity Track System")
-    st.write("This platform aims to enhance transparency and accountability in public administration.")
+    st.write("This platform enhances transparency and accountability in public administration.")
 
 # Report Incident Page
 elif choice == "Report Incident":
-    st.header("Report Incident")
     with st.form(key='incident_form'):
         name = st.text_input("Name")
         department = st.selectbox("Department", data["Sectors"])
         incident = st.text_area("Incident Description")
         submit_button = st.form_submit_button(label='Submit')
-        
+
         if submit_button:
             st.success(f"Thank you {name}, your report has been submitted.")
 
@@ -71,7 +71,7 @@ elif choice == "Data Analysis":
     # Display the dataset
     st.write("### Sector Dataset")
     st.write(df)
-    
+
     # Number of sectors
     st.write("### Number of Sectors")
     st.write(len(data["Sectors"]))
@@ -80,21 +80,72 @@ elif choice == "Data Analysis":
     st.write("### Bar Graph of Allocated Funds")
     st.bar_chart(df.set_index("Sectors"))
 
-    # Example SHAP values visualization (assuming a model is already trained and shap_values are available)
-    # Here we'll use dummy data for demonstration
+    # Example SHAP values visualization
     X = df["Allocated Funds (KSh)"].values.reshape(-1, 1)
     shap_values = np.random.rand(len(X), 1)  # Dummy SHAP values
     st.write("### SHAP Values")
     shap.summary_plot(shap_values, X, feature_names=["Allocated Funds (KSh)"])
 
-    # Anchors and Chinstrap analysis placeholders (assuming appropriate methods are implemented)
-    st.write("### Anchors and Chinstrap Analysis")
-    st.write("Anchors and Chinstrap analysis would be implemented here.")
-
     # Dataset distribution
     st.write("### Dataset Distribution")
     st.write("Distribution of the Allocated Funds")
     st.hist(X, bins=10)
+
+# Interactive Quiz Application (New Feature)
+elif choice == "Quiz Application":
+    st.header("Interactive Quiz Application")
+    st.write("Test your knowledge with multiple-choice questions.")
+
+    # Example quiz
+    question = "Which sector received the highest fund allocation?"
+    options = ["Executive", "Judiciary", "Health", "Roads & Transport"]
+    answer = st.radio(question, options)
+
+    if answer == "Executive":
+        st.success("Correct!")
+    else:
+        st.error("Wrong answer. Try again.")
+
+# Portfolio Project Idea Bank
+elif choice == "Portfolio Project Idea Bank":
+    st.header("Portfolio Project Idea Bank")
+    st.subheader("Guide for this Project Idea Bank")
+
+    st.write("""
+    - **Interactive Quiz Application**:
+        - **Tech Stack**: Python (Flask/Django), HTML, CSS
+        - **Description**: Create a quiz application with scoring, time limits, and feedback. Reinforce Python and web development.
+        - **Milestones**:
+            - Auth system/Session management
+            - Storage of quiz results under user accounts
+            - Responsive application
+            - Bonus: Add new quiz sets and expose a REST API for quiz questions
+    
+    - **Algorithm Visualizer**:
+        - **Tech Stack**: JavaScript (React), HTML, CSS
+        - **Description**: Visualize sorting algorithms like bubble sort, quicksort, etc. Reinforce algorithm concepts with React.
+        - **Milestones**:
+            - Users can visualize different algorithms
+            - Filter between types of algorithms
+            - Bonus: Python, C, and JavaScript implementation
+    
+    - **Chat Application**:
+        - **Tech Stack**: JavaScript (React, Node), WebSocket
+        - **Description**: Real-time chat app with WebSocket communication.
+        - **Milestones**:
+            - Authentication and chat history
+            - Profile pictures, bios, room messaging
+
+    - **E-commerce Website**:
+        - **Tech Stack**: JavaScript (React, Node), MongoDB
+        - **Description**: A simple e-commerce website with cart, order history, and product listings.
+        - **Milestones**:
+            - User authentication
+            - Product listing and shopping cart
+            - Responsive UI, Stripe integration for payments
+
+    (More project ideas are included in the idea bank for further exploration.)
+    """)
 
 # Footer
 st.sidebar.write("Developed by:")
@@ -102,5 +153,4 @@ st.sidebar.write("[Charles Sewe](https://www.linkedin.com/in/charles-sewe)")
 
 st.sidebar.write("[Project Blog Article](https://docs.google.com/document/d/1F1L9EltYW28vnnULs5z-plJ_VAuMDzupGw3w8vheQEM/edit?usp=sharing)")
 st.sidebar.write("[Deployed Site](https://csewe56-qnvf2ccw3bdesyqxhnfuqd.streamlit.app/)")
-
 
